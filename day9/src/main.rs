@@ -16,6 +16,14 @@ where
         y
     }
 }
+
+/*
+the string slice returned from the function will live 
+at least as long as lifetime 'a. In practice, 
+it means that the lifetime of the reference returned 
+by the longest function is the same as the smaller of the 
+lifetimes of the references passed in. 
+*/
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
@@ -94,10 +102,14 @@ fn main() {
     // Remark to review about lifetimes
 
     let s = "Hello";
-    let t = "LLL";
+    let result: &str;
+    {
+        let t = "LLLTSS";
+        result = longest(s, t);
+    }
 
-    println!("{}", s);
-    longest_with_an_announcement(s, t, String::from("Hello World"));
+    println!("{}", result);
+    // longest_with_an_announcement(s, t, String::from("Hello World"));
 }
 
 /*
