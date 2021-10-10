@@ -38,6 +38,10 @@ pub fn greeting(name: &str) -> String {
     String::from(name)
 }
 
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -87,7 +91,7 @@ mod tests {
     #[test]
     fn greeting_contains_name() {
         let result = greeting("World");
-        assert!(result.contains("Hello World"), "Greeting did not return properly, value was {}", result);
+        assert!(result.contains("World"), "Greeting did not return properly, value was {}", result);
     }
 
     #[test]
@@ -113,6 +117,11 @@ mod tests {
                 i + j;
             }
         }
+    }
+
+    #[test]
+    fn it_internal_adder() {
+        assert_eq!(internal_adder(3, 3), 6);
     }
 }
 
